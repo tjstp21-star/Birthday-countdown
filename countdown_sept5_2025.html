@@ -1,0 +1,119 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Countdown to September 5, 2025</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: #0b0f19;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .wrap {
+      max-width: 900px;
+      padding: 24px;
+    }
+    h1 {
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 600;
+      margin: 0 0 16px;
+      letter-spacing: 0.5px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(70px, 1fr));
+      gap: 12px;
+      margin: 12px auto 8px;
+    }
+    .box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 18px 12px;
+    }
+    .num {
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(28px, 9vw, 80px);
+      line-height: 1;
+      font-weight: 700;
+    }
+    .label {
+      margin-top: 8px;
+      opacity: 0.8;
+      font-size: clamp(11px, 2.4vw, 14px);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .sub {
+      margin-top: 14px;
+      opacity: 0.8;
+      font-size: 14px;
+    }
+    .done {
+      font-size: clamp(22px, 5vw, 40px);
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+    .fineprint {
+      margin-top: 18px;
+      opacity: 0.6;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Countdown to <strong>September 5, 2025</strong></h1>
+    <div id="timer" class="grid" role="timer" aria-live="polite" aria-atomic="true" aria-label="Countdown in days, hours, minutes, and seconds">
+      <div class="box"><div id="d" class="num">–</div><div class="label">Days</div></div>
+      <div class="box"><div id="h" class="num">–</div><div class="label">Hours</div></div>
+      <div class="box"><div id="m" class="num">–</div><div class="label">Minutes</div></div>
+      <div class="box"><div id="s" class="num">–</div><div class="label">Seconds</div></div>
+    </div>
+    <div id="done" class="done" style="display:none;">It’s September 5, 2025 — have an amazing day! 🎉</div>
+    <div class="sub">This counts down to midnight at the start of the day in your device’s local time.</div>
+    <div class="fineprint">Tip: Save this page to your home screen for a live countdown.</div>
+  </div>
+
+  <script>
+    // Target: September 5, 2025 00:00:00 local time
+    const target = new Date('September 5, 2025 00:00:00');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      const now = new Date();
+      let diff = target - now;
+
+      if (diff <= 0) {
+        document.getElementById('timer').style.display = 'none';
+        document.getElementById('done').style.display = 'block';
+        clearInterval(timer);
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      document.getElementById('d').textContent = days;
+      document.getElementById('h').textContent = pad(hours);
+      document.getElementById('m').textContent = pad(minutes);
+      document.getElementById('s').textContent = pad(seconds);
+    }
+
+    tick();
+    const timer = setInterval(tick, 1000);
+  </script>
+</body>
+</html>
